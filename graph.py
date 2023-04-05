@@ -120,20 +120,31 @@ class Graph:
     def greedySearch(self, node: str):
         stack = [node]
         app = []
+        Vistednode=[]
         while stack:
             current = stack.pop()
-            print(current)
-            for i in self.adjacencyList[current]:
-                app.append(i[1])
-            if app == []:
-                break
-            check = app.index(min(app))
-            stack.append(self.adjacencyList[current][check][0])
-            app.clear()
+            if current in self.adjacencyList:
+                if self.adjacencyList[current] != []:
+                    if current not in Vistednode:
+                        print(current)
+                    else:
+                        break
+                    Vistednode.append(current)
+                    for i in self.adjacencyList[current]:
+                        app.append(i[1])
+                    if app == []:
+                        break
+                    check = app.index(min(app))
+                    stack.append(self.adjacencyList[current][check][0])
+                    app.clear()
+                else:
+                    print(node,"no cennection")
+            else:
+                print(node,"not found in graph")
 
     def aStarSearch(self, start: str, target: str, heuristic: any):
         pass
-    def degree(self):
+   def degree(self):
         # dgreeof centrality = number of connected nodes/nodes-1
         app = []
         chek = []
@@ -153,11 +164,13 @@ class Graph:
             final = k[1]
             second.append(final)
         second.sort()
+
         for i in range(len(second) - 1, len(second) - 4, -1):
 
             for l in chek:
                 if l[1] == second[i]:
                     temp2 = [l[0], l[1]]
-                    finalNode.append(temp2)
+                    if temp2 not in finalNode:
+                        finalNode.append(temp2)
         print("the three Nodes highest in degree centrality in order  are", finalNode)
 
