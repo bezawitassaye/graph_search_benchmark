@@ -1,8 +1,8 @@
 from pprint import pprint
 class Graph:
-    adjacencyList: map = {}
-    def __init__(self):
+      def __init__(self):
         self.adjacencyList: map = {}
+        
 
     def show(self):
         pprint(self.adjacencyList)
